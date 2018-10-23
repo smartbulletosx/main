@@ -69,17 +69,26 @@ struct LinkedList{
         cout << endl;
     }
 
-    void pop_back(){
+    void del_back(){
+        Node *t = first;
       if(size == 0){
             cout << 0 << endl;
         }
         else {
-            last->r = nullptr;
-            last->val = 1 ;
-
+            while(t->r != last->l){
+            t = t->r;
+        }
+        t=t->r;
+        t->r=nullptr;
         }
         size--;
     }
+
+    void del_front(){
+        first = first->r;
+        size --;
+    }
+
     void begin(){
         Node *t = first;
         while(t->l != nullptr){
@@ -117,16 +126,16 @@ struct LinkedList{
     }
 
     void len(){
-    cout << size<< endl;
+    cout << size << endl;
     }
 
     void isEmpty(int el){
         Node *t = first;
         while(t != nullptr){
-            if (t->val==el) return 1;
+            if (t->val==el) {cout << 1 << endl; return ;}
             t = t->r;
         }
-        return 0;
+        cout << 0 << endl;
     }
 };
 
@@ -145,14 +154,17 @@ int main(){
         list.addFront(i+1);
     }
     list.showList();
-    list.pop_back();
+    list.del_back();
+    list.showList();
+    list.del_front();
     list.showList();
     list.begin();
     list.end();
     list.len();
     list.bol();
     list.mal();
+    list.isEmpty(2);
+    list.isEmpty(31);
+
 }
-
-
 
